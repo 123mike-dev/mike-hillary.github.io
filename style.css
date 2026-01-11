@@ -6,10 +6,12 @@ body {
   line-height: 1.6;
   background: #f4f6f8;
   color: #333;
+  scroll-behavior: smooth;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 /* Container */
@@ -19,11 +21,43 @@ a {
   padding: 20px;
 }
 
+/* Navigation Bar */
+nav#navbar {
+  position: sticky;
+  top: 0;
+  background: #0a2540;
+  z-index: 999;
+  width: 100%;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px 0;
+}
+
+.nav-container a {
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-container a:hover {
+  color: #ff6f61;
+}
+
+/* Active nav link */
+.nav-container a.active {
+  color: #ff6f61;
+  border-bottom: 2px solid #ff6f61;
+}
+
 /* Header */
 header {
   background: #0a2540;
   color: white;
-  padding: 60px 0;
+  padding: 60px 0 40px 0;
   text-align: center;
 }
 
@@ -61,6 +95,7 @@ section h2 {
 }
 
 .project-btn {
+  position: relative;
   display: inline-block;
   background: #0a2540;
   color: white;
@@ -68,13 +103,40 @@ section h2 {
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.3s ease;
+  opacity: 0; /* for staggered reveal */
+  transform: translateY(30px); /* for staggered reveal */
 }
 
 .project-btn:hover {
   background: #ff6f61;
-  color: white;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Tooltip */
+.project-btn .tooltip {
+  visibility: hidden;
+  width: 280px;
+  background-color: #ff6f61;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 105%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-weight: 400;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.project-btn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Skills Section */
@@ -108,8 +170,26 @@ footer {
   margin-top: 40px;
 }
 
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Visible class for staggered project/research buttons */
+.project-buttons .project-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   header h1 {
     font-size: 2rem;
   }
@@ -117,5 +197,24 @@ footer {
   section {
     padding: 20px;
     margin: 20px 10px;
+  }
+
+  /* Mobile tooltips always visible */
+  .project-btn .tooltip {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .project-buttons {
+    gap: 25px;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    gap: 15px;
   }
 }
