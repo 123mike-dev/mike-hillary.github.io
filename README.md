@@ -15,7 +15,7 @@ This is a poster designed for a charity event aimed at raising awareness for com
 - Suitable for both digital and print formats
 
 ### Screenshots
-![Poster Preview](Poster-CharityEvent/images/poster1.png)
+![Poster Preview](Poster-CharityEvent/images/IMAGE 1.png)
 
 ### Source Files
 Download the editable source file: [poster1.ai](Poster-CharityEvent/source-files/poster1.ai)
